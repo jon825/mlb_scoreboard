@@ -1,8 +1,33 @@
 .App{
   color:white;
-  background:black;
 }
 
+nav{
+  margin-bottom:20px;
+}
+
+nav li{
+  border:none !important;
+}
+
+.nav-NlLeague{
+  margin-left:50px;
+}
+
+.leagueSelection{
+  padding:0 !important;
+  margin-top:30px;
+}
+
+
+td{
+  border:solid;
+}
+
+
+.leagueSelection h6{
+  padding:0 !important;
+}
 
 li{
   list-style: none;
@@ -46,8 +71,11 @@ li .teamRecord{
   margin-left:30px;
 }
 
+.datePickerRow{
+  margin-top:10px;
+}
+
 .datePicker{
-  width:200px;
   height:auto;
   font-size:20px;
 }
