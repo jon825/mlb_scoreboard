@@ -3,40 +3,106 @@ import "../css/App.css";
 
 class AmericanLeague extends Component {
   render() {
-    let ranking = this.props.leagueRanking;
-    let divisionRanking;
-    if (ranking.length !== 0) {
-      divisionRanking = ranking.map((team, index) => {
-        let teamRanking = team.map((x, index) => {
+    let tableStanding;
+    let ALCentral;
+    let ALEast;
+    let ALWest;
+    const leagueRanking = this.props.leagueRanking;
+
+    if (leagueRanking.legnth !== 0) {
+      ALEast = leagueRanking
+        .filter(x => {
+          return x.division === "American League East";
+        })
+        .map((y, index) => {
           return (
             <tbody key={index}>
               <tr>
-                <td>{x.name}</td>
+                <td>{y.name}</td>
                 <td>
-                  {x.leagueRecord.wins}-{x.leagueRecord.losses}
+                  {y.leagueRecord.wins}-{y.leagueRecord.losses}
                 </td>
-                <td>{x.leagueRecord.pct}</td>
-                <td>{x.GB}</td>
+                <td>{y.leagueRecord.pct}</td>
+                <td>{y.divisionGamesBack}</td>
               </tr>
             </tbody>
           );
         });
-        return (
-          <table className="table" key={index}>
-            <thead>
+      ALWest = leagueRanking
+        .filter(x => {
+          return x.division === "American League West";
+        })
+        .map((y, index) => {
+          return (
+            <tbody key={index}>
               <tr>
-                <th scope="col">Division</th>
-                <th scope="col">W-L</th>
-                <th scope="col">PCT</th>
-                <th scope="col">GB</th>
+                <td>{y.name}</td>
+                <td>
+                  {y.leagueRecord.wins}-{y.leagueRecord.losses}
+                </td>
+                <td>{y.leagueRecord.pct}</td>
+                <td>{y.divisionGamesBack}</td>
               </tr>
-            </thead>
-            {teamRanking}
-          </table>
-        );
-      });
+            </tbody>
+          );
+        });
+      ALCentral = leagueRanking
+        .filter(x => {
+          return x.division === "American League Central";
+        })
+        .map((y, index) => {
+          return (
+            <tbody key={index}>
+              <tr>
+                <td>{y.name}</td>
+                <td>
+                  {y.leagueRecord.wins}-{y.leagueRecord.losses}
+                </td>
+                <td>{y.leagueRecord.pct}</td>
+                <td>{y.divisionGamesBack}</td>
+              </tr>
+            </tbody>
+          );
+        });
     }
-    return <div>{divisionRanking}</div>;
+
+    return (
+      <div>
+        <table className="table">
+          <thead>
+            <tr>
+            <th>AL East</th>
+            <th>W-L</th>
+            <th>PCT</th>
+            <th>GB</th>
+            </tr>
+          </thead>
+          {ALEast}
+        </table>
+        <table className="table">
+          <thead>
+            <tr>
+            <th>AL West</th>
+            <th>W-L</th>
+            <th>PCT</th>
+            <th>GB</th>
+            </tr>
+          </thead>
+          {ALWest}
+        </table>
+        <table className="table">
+          <thead>
+            <tr>
+            <th>AL Central</th>
+            <th>W-L</th>
+            <th>PCT</th>
+            <th>GB</th>
+            </tr>
+          </thead>
+          {ALCentral}
+        </table>
+      </div>
+    );
   }
 }
 export default AmericanLeague;

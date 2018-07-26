@@ -25,14 +25,6 @@ app.get("/", (req, res) => {
   sendData(req, res);
 });
 
-app.get("/NLStanding", (req, res) => {
-  getNLRankings(req, res);
-});
-
-app.get("/ALStanding", (req, res) => {
-  getALRankings(req, res);
-});
-
 app.post("/", (req, res) => {
   let date = new Date(req.body.date);
   date = date.toLocaleDateString();
@@ -77,14 +69,16 @@ function sendData(req, res) {
             division = "American League East";
           }
           x.teamRecords.map(y => {
-            // console.log(y)
+            console.log(y)
             let teamObj = {
               name: y.team.name,
               division: division,
               divisionRank: y.divisionRank,
               divisionGamesBack: y.divisionGamesBack,
               leagueRank: y.leagueRank,
-              leagueRecord: y.leagueRecord
+              leagueRecord: y.leagueRecord,
+              wildCardRank:y.wildCardRank,
+              wildCardGamesBack:y.wildCardGamesBack
             };
             standing.push(teamObj);
           });
@@ -101,6 +95,10 @@ function sendData(req, res) {
   });
 }
 
+
+// getListOfGames().then((data)=>{
+//   console.log(data[0].records[0].teamRecords)
+// })
 
 
 function getNLRankings(req, res) {

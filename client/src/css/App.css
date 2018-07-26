@@ -3,7 +3,7 @@
 }
 
 nav{
-  margin-bottom:20px;
+  margin-bottom:40px;
 }
 
 nav li{
@@ -20,8 +20,19 @@ nav li{
 }
 
 
-td{
-  border:solid;
+.table thead th{
+  background:#1e1f21;
+  border:none !important;
+}
+
+tr{
+  border:none !important;
+}
+
+
+.table td{
+  width:20%;
+  border-top:#1e1f21 solid 1px;
 }
 
 

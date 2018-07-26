@@ -23,7 +23,6 @@ class ListOfGames extends Component {
         }
         mlbStanding.forEach(y => {
           if (x.teams.away.team.name === y.name) {
-            console.log(y.division)
             awayDivisionRank = getGetOrdinal(y.divisionRank);
             awayDivision = getDivisionAcronym(y.division);
           }

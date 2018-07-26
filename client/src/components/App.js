@@ -1,10 +1,14 @@
 import React, { Component } from "react";
 import Heading from "./Heading";
 import ListOfGames from "./ListOfGames";
+import MlbStanding from "./MlbStanding";
 import "../css/App.css";
 import axios from "axios";
+import ReactDOM from 'react-dom';
+
 import DatePicker from "react-datepicker";
 import moment from "moment";
+import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 import "react-datepicker/dist/react-datepicker.css";
 
 class App extends Component {
@@ -70,7 +74,6 @@ class App extends Component {
 
   getDivisionAcronym(division){
     let acronym;
-    console.log(division)
     let array = division.split(" ");
     for(let i = 0; i < array.length; i++){
       acronym = `${array[0][0]}${array[1][0]} ${array[2]}`;
@@ -122,5 +125,7 @@ class App extends Component {
     );
   }
 }
+
+
 
 export default App;

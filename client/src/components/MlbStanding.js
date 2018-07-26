@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import Heading from "./Heading";
 import AmericanLeague from "./AmericanLeague";
 import NationalLeague from "./NationalLeague";
+import WildCard from "./WildCard";
 import axios from "axios";
-
 import "../css/App.css";
 
 class MlbStanding extends Component {
@@ -12,34 +12,32 @@ class MlbStanding extends Component {
     this.state = {
       page: "AlStanding",
       NLStanding: [],
-      AlStanding: []
+      ALStanding: [],
+      mlbStanding:[]
     };
     this.goTo = this.goTo.bind(this);
-    this.getALStanding = this.getALStanding.bind(this);
-    this.getNLStanding = this.getNLStanding.bind(this);
   }
 
   componentDidMount() {
-    this.getALStanding();
-    this.getNLStanding();
-  }
-
-  getALStanding() {
-    axios.get("http://localhost:8080/ALStanding").then(res => {
-      this.setState({
-        AlStanding: res.data
-      });
+    var receviedProps = this.props.location.state.mlbStanding;
+    let NLStanding = this.state.NLStanding;
+    let ALStanding = this.state.ALStanding;
+    NLStanding = receviedProps.filter((team)=>{
+      if(team.division.includes("National League")){
+        return team
+      }
+    })
+    ALStanding = receviedProps.filter((team)=>{
+      if(team.division.includes("American League")){
+        return team
+      }
+    })
+    this.setState({
+      mlbStanding:receviedProps,
+      NLStanding:NLStanding,
+      ALStanding:ALStanding
     });
   }
-
-  getNLStanding() {
-    axios.get("http://localhost:8080/NLStanding").then(res => {
-      this.setState({
-        NLStanding: res.data
-      });
-    });
-  }
-
   goTo(league) {
     this.setState({
       page: league
@@ -47,12 +45,16 @@ class MlbStanding extends Component {
   }
 
   render() {
+
     let leagueRanking;
     if (this.state.page === "AlStanding") {
-      leagueRanking = <AmericanLeague leagueRanking={this.state.AlStanding} />;
+      leagueRanking = <AmericanLeague leagueRanking={this.state.ALStanding} />;
     } else if (this.state.page === "NLStanding") {
       leagueRanking = <NationalLeague leagueRanking={this.state.NLStanding} />;
+    } else if (this.state.page === "WildCard") {
+      leagueRanking = <WildCard leagueRanking={this.state.mlbStanding} />;
     }
+
     return (
       <div>
         <div className="container-fluid">
@@ -85,12 +87,19 @@ class MlbStanding extends Component {
                     >
                       NATIONAL LEAGUE
                     </h6>
+                    <h6
+                      className="nav-item nav-link nav-NlLeague"
+                      onClick={() => {
+                        this.goTo("WildCard");
+                      }}
+                    >
+                      WILDCARD
+                    </h6>
                   </div>
                 </div>
               </nav>
             </div>
           </div>
-
           {leagueRanking}
         </div>
       </div>
