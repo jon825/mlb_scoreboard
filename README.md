@@ -8,7 +8,8 @@ Fully interactive Mlb Scoreboard. Select any date you wish to see the latest sco
 Mlb Scoreboard is developed with create-react-app.
 ```
 $ npm install
-$ npm start
+$ npm start in client
+$ nodemon server.js in server
 ```
 ## Built with
 * React
